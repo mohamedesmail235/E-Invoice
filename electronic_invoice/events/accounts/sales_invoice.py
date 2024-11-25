@@ -163,6 +163,7 @@ def create_qr_code(doc, method):
 
 			# assigning to document
 			doc.db_set('qr_code', _file.file_url)
+   			doc.db_set('ksa_einv_qr', _file.file_url)
 			doc.notify_update()
 
 			break"""
