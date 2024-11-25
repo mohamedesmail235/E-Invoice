@@ -165,11 +165,9 @@ def create_qr_code(doc, method):
 			doc.db_set('qr_code', _file.file_url)
    			doc.db_set('ksa_einv_qr', _file.file_url)
 			doc.notify_update()
-			break
+			
 
 def delete_qr_code_file(doc, method):
-	"""Delete QR Code on deleted sales invoice"""
-
 	region = get_region(doc.company)
 	if region not in ['Saudi Arabia']:
 		return
