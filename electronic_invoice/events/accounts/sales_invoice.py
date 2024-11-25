@@ -139,35 +139,15 @@ def create_qr_code(doc, method):
 			frappe.db.commit()
 			# assigning to document
 			doc.db_set('qr_code', _file.file_url)
+			doc.db_set('ksa_einv_qr', _file.file_url)
 			doc.notify_update()
 			break
 
 
 
-
-			"""qr_image = io.BytesIO()
-
-			xml = qr_create(xml,error='L',mode='binary', encoding='utf-8',)
-			xml.png(qr_image, scale=2, quiet_zone=1)
-
-			# making file
-			filename = f"QR-CODE-{doc.name}.png".replace(os.path.sep, "__")
-			_file = frappe.get_doc({
-				"doctype": "File",
-				"file_name": filename,
-				"content": qr_image.getvalue(),
-				"is_private": 1
-			})
-
-			_file.save()
-
-			# assigning to document
-			doc.db_set('qr_code', _file.file_url)
-   			doc.db_set('ksa_einv_qr', _file.file_url)
-			doc.notify_update()
-			
-
 def delete_qr_code_file(doc, method):
+	"""Delete QR Code on deleted sales invoice"""
+
 	region = get_region(doc.company)
 	if region not in ['Saudi Arabia']:
 		return
